@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StarBank - Interfaz Bancaria</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  
+    <!---DIAPOSITIVA GENERAL LA PRIMERA QUE VE EL USUARIO-->
+    <div class="container" id="menu">
+
+        <img src="IMG_20240401_131628-removebg.png" alt="StarBank Logo" class="logo">
+        <h1>"ATM-STARTBANK"</h1>
+        <p class="slogan">Seleccione una de las opciones:</p>
+        <div class="options">
+            <a href="#" onclick="showCardForm()">Acceso Cliente</a>
+            <a href="#" onclick="showServiceMenu()">Acceso Público</a>
+        </div>
+        <h2>"SU SEGURIDAD ES NUESTRA PRIORIDAD" 👌</h2>
+        <br>
+        <p class="slogan2">¡¡Recuerde nunca comparta sus datos personales!!</p>
+        <p class="slogan">💵 STARTBANK de S.A de C.V 💵</p>
+    </div>
+
+
+
+    <!---AQUI EMPIEZAN LAS DIAPOSITIVAS DE INGRESO CON TARJETA-->
+    <div class="container" style="display: none;" id="card-form">
+        <br>
+        <img src="IMG_20240401_131628-removebg.png" alt="StarBank Logo" class="logo">
+        <h1>Cliente</h1>
+        <form class="options">  
+            <label for="cardNumber">Número de Tarjeta:</label>              
+            <input type="text" id="cardNumber" name="cardNumber" maxlength="16">
+            <p id="card-error" style="color: #ff921d; display: none;"> !!! El número de tarjeta debe tener exactamente 16 dígitos !!!</p>
+            <a href="#" onclick="validateCard()">Ingresar</a>
+        </form>
+        <button type="button" onclick="regresarmenuprincipio()">Regresar</button>
+        <p class="slogan2">!!Recuerde nunca comparta sus datos personales!!</p>
+        <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+    </div>
+    
+    <!--DIAPOSITIVA QUE SIMULA LA VALIDACION DE TARJETA-->
+    <div class="container" style="display: none;" id="processing">
+        <img src="IMG_20240401_131628-removebg.png" alt="StarBank Logo" class="logo">
+        <h1>Validando Tarjeta...</h1>
+        <p class="slogan">Espere un momento por favor...</p>
+        <img src="VAyR.gif" alt="imagen" class="gifs">
+        <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+    </div>
+    
+    <!--DIAPOSITIVA DONDE SE LE PIDE EL NIP AL USUARIO -->
+     <div class="container" style="display: none;" id="pin-form">
+        <img src="IMG_20240401_131628-removebg.png" alt="StarBank Logo" class="logo">
+        <h1>NIP</h1>
+        <label for="">Ingrese su NIP</label>
+        <form>
+            <input type="password" id="pin" name="pin" maxlength="4">
+            <button type="button" onclick="validatePin()">Aceptar</button>
+        </form>
+        <p id="pin-error" style="color: #fafafa; display: none;"> !!! El NIP debe tener exactamente 4 dígitos !!!</p>
+        <br>
+        <p class="slogan2">!!Recuerde nunca comparta sus datos personales!!</p>
+        <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+    </div>
+
+    <!--DIAPOSITIVA DE ACCESO PUBLICO-->
+    <div class="container" style="display: none;" id="service-menu">
+        <img src="IMG_20240401_131628-removebg.png" alt="StarBank Logo" class="logo">
+        <h1>Publico</h1>
+        <h2>Pago de Servicios</h2>
+           <form action="a">
+            <div class="options">
+                <label for="numeroServicio">Numero de Servicio:</label>
+                <input type="text" id="numeroServicio" name="numeroServicio">
+                <br>
+                <a href="#" onclick="pagarServicio()">Ingresar</a>
+                </div>
+                <button type="button" onclick="regresarmenuprincipio1()">Regresar</button>
+            <br>
+            <p class="slogan2">!!Recuerde nunca comparta sus datos personales!!</p>
+            <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+           </form>
+    </div>
+    
+    <!--DIAPOSITIVA DE TIPO DE SERVICIO A PAGAR-->
+
+    <div class="container" style="display: none;" id="PAGOS">
+        <img src="IMG_20240401_131628-removebg.png" alt="StarBank Logo" class="logo">
+        <h1>Menú de Servicios</h1>
+        <label for="tipoServicio">Tipo de Servicio: <span id="tipo-servicio-pago"></span></label>
+        <form>
+            <label for="numeroServicio">La cantidad a pagar es de: <span id="cantidad-pago"></span></label>
+            <input type="text" id="CantidaS" name="CantidaS">
+            <button type="button" onclick="serPago()">Pagar</button>
+        </form>
+
+        <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+    </div>
+    <div class="container" style="display: none;" id="PAGOS2">
+        <img src="IMG_20240401_131628-removebg.png" alt="StarBank Logo" class="logo">
+        <h1>Menú de Servicios</h1>
+        <label for="tipoServicio">Tipo de Servicio: <span id="tipo-servicio-pago2"></span></label>
+        <form>
+            <label for="numeroServicio2">La cantidad a pagar es de: <span id="cantidad-pago2"></span></label>
+            <input type="text" id="CantidaSE" name="CantidaSE">
+            <button type="button" onclick="serPago2()">Pagar</button>
+        </form>
+        <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+    </div>
+    
+    <!--DIAPOSITIVA DE PAGO EXITOSO-->
+
+    <div class="container" style="display: none;" id="servicio-pagado">
+        <h1>Servicio pagado Exitosamente</h1>
+        <img src="R.png" alt="" class="logo">
+        <p class="slogan">Su servicio ha sido pagado exitosamente. ¡Gracias por su pago!</p>
+        <button type="button" onclick="regresarMenuPrincipal()">Continuar</button>
+        <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+    </div> 
+
+    <!--DIAPOSITIVA DE OPCION POR TARJETA DE DEBITO-->
+
+    <div class="container" style="display: none;" id="menuD">
+        <img src="IMG_20240401_131628-removebg.png" alt="StarBank Logo" class="logo">
+        <h1>Debito</h1>
+        <p class="slogan">Seleccione una de las opciones:</p>
+        <div class="options">
+            <a href="#" onclick="showMenu('deposito')">Depósito</a>
+            <a href="#" onclick="showMenu('retiro')">Retiro</a>
+            <a href="#" onclick="showMenu('transaction-history')">Movimientos</a>
+            <a href="#" onclick="showMenu('cambioNIP')">Cambio de NIP</a>
+            <a href="#" onclick="showMenu('service-menu2')">Pago de Servicios</a>
+            <a href="#" onclick="mostrarSaldo()">Consultar Saldo</a>
+            <br>
+        <button type="button" onclick="volverasubmenu()">Regresar</button>
+        <p class="slogan2">!!Recuerde nunca comparta sus datos personales!!</p>
+        <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+        </div>
+    </div> 
+
+
+    <!--DIAPOSITIVA DE CONSULTAR SALDO-->
+
+    <div class="container" style="display: none;" id="consultaSaldo">
+        <img src="IMG_20240401_131628-removebg.png" alt="logo" class="logo">
+        <h1>Saldo</h1>
+        <p class="slogan">Saldo Actual: <span id="saldoActual"> <span id="saldo"></span></span></p>
+        <form class="options">
+            <button type="button" onclick="volverMenudebito()">Regresar</button>
+            <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+        </form>
+    </div>
+
+
+    <div class="container" style="display: none;" id="transaction-history">
+        <img src="IMG_20240401_131628-removebg.png" alt="" class="logo">
+        <h1>Historial de Transacciones</h1>
+        <p class="slogan">Aquí se muestra el Historial de las transacciones</p>
+        <form class="options">
+            <a href="#" onclick="Histor()">Mostrar Historial</a>
+            <button type="button" onclick="regresarmenuprincipio2()">Regresar</button>
+            <div class="container" style="display: none;" id="transaction-history-continue">
+            <form action>
+            <br>
+            <button type="button"  onclick="mostrarSubMenu('operations-menu')">Continuar</button>
+            
+            <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+            </form>
+        </div>
+    </div>
+
+
+    <!--DIAPOSITIVA DE MENU DEPOSITOS-->
+    
+    <div class="container" style="display: none;" id="deposito">
+        <img src="IMG_20240401_131628-removebg.png" alt="startbank logo" class="logo">
+        <h1>Depósitos </h1>
+        <form class="options">
+            <label for="cantidadDeposito">Cantidad a depositar:</label>
+            <input type="number" id="cantidadDeposito" name="cantidadDeposito">
+            <a href="#" type="button" onclick="realizarDeposito()">Continuar</a>
+        </form>
+        <button  type="button"  onclick="regreMenuD()">Regresar</button>
+        <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+    </div>
+
+  
+
+    <!--DIAPOSITIVA DE DEPOSITO EXITOSO-->
+
+    <div class="container" style="display: none;" id="deposit-success">
+        <img src="IMG_20240401_131628-removebg.png" alt="startbank logo" class="logo">
+        <h1>Depósito Exitoso</h1>
+        <p class="slogan">¡El depósito se ha realizado con éxito!</p>
+        <form>
+            <img src="6l3f3myw.bmp" alt="" class="logo">
+        <button type="button" onclick="Regre('deposit-success')">Continuar</button>
+        <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+        </form>
+    </div>
+
+    <!--DIAPOSITIVA DE MENU RETIROS-->
+    
+    <div class="container" style="display: none;" id="retiro">
+        <img src="IMG_20240401_131628-removebg.png" alt="smartbank logo" class="logo">
+        <h1>Retiros</h1>
+        <form id="retiro-form" class="options">
+            <label for="retiro-amount">Cantidad a retirar:</label>
+            <input type="number" id="retiro-amount" name="retiro-amount">
+            <a href="#" type="button" onclick="realizarRetiro()">Retirar</a>
+            <button  type="button"  onclick="regreMenuD2()">Regresar</button>
+        </form>
+        <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+    </div>
+
+        <!--DIAPOSITIVA RETIRO EXITOSO-->
+
+        <div class="container" style="display: none;" id="withdraw-success">
+            <img src="IMG_20240401_131628-removebg.png" alt="smartbank logo" class="logo">
+            <h1>Retiro Exitoso</h1>
+            <form action>
+            <p class="slogan">¡El retiro se ha realizado con éxito!</p>
+            <img src="7REm.gif" alt="gif telmex-logo" class="logo">
+            <br>
+            <button type="button" onclick="Regre('withdraw-success')">Continuar</button>
+            <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+            </form>
+        </div>
+        
+        <!--DIAPOSITIVA DE CAMBIO DE NIP-->
+        
+        <div class="container" style="display: none;" id="cambioNIP">
+            <img src="IMG_20240401_131628-removebg.png" alt="smartbank logo" class="logo">
+            <h1>Cambio de NIP</h1>
+            <p class="slogan">Formulario para cambiar el NIP</p>
+            <form id="change-pin-form" class="options">
+                <label for="new-pin">Ingrese un nuevo NIP:</label>
+                <input type="password" id="newpin" name="newpin" maxlength="4">
+                <a href="#" type="button" onclick="cambiarNIP()">Cambiar</a>
+                <button  type="button"  onclick="regreMenuD3()">Regresar</button>
+            </form>
+            <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+        </div>
+        
+        <!--DIAPOSITIVA DE CAMBIO DE NIP EXITOSO-->
+
+        <div class="container" style="display: none;" id="change-pin-success">
+            <img src="IMG_20240401_131628-removebg.png" alt="logo" class="logo">
+            <form action>
+            <h1>Cambio de NIP Exitoso</h1>
+            <p class="slogan">¡El cambio de NIP se ha realizado con éxito!</p>
+            <img src="nepebl30.bmp" alt="" class="logo">
+            <button type="button"  onclick="Regre('change-pin-success')">Continuar</button>
+            <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+            </form>
+        </div>
+        
+       <!--DIAPOSITIVA DE HISTORIAL-->
+
+       <div class="container" style="display: none;" id="transaction-history">
+        <img src="IMG_20240401_131628-removebg.png" alt="" class="logo">
+        <h1>Historial de Transacciones</h1>
+        <p class="slogan">Aquí se muestra el Historial de las transacciones</p>
+        <form class="options">
+            <a href="#" onclick="Histor()">Mostrar Historial</a>
+            <button type="button" onclick="regresarmenuprincipio2()">Regresar</button>
+            <div class="container" style="display: none;" id="transaction-history-continue">
+            <form action>
+            <br>
+            <button type="button"  onclick="mostrarSubMenu('operations-menu')">Continuar</button>
+            
+            <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+            </form>
+        </div>
+    </div>
+       
+    <!--SIGUIENTE DIAPO DE HISTORIAL-->
+       
+    <div class="container2" style="display: none;" id="history89">
+        <img src="IMG_20240401_131628-removebg.png" alt="" class="logo">
+        <h1>Historial de Transacciones</h1>
+        <p class="slogan">Aquí se muestra el Historial de las transacciones</p>
+        <div id="transaction-container"></div>
+        <p class="slogan"> <span id="Fecha"></span></p>
+        <p class="slogan"><span id="Tipo"></span></p>
+        <p class="slogan"> <span id="Monto"></span></p>
+        <button onclick="Regre('history89')">Ver Continuar</button>
+        <div class="container" style="display: none;" id="transaction-history-continue">
+            <br>
+            <br>
+            <button type="button" onclick="mostrarSubMenu('operations-menu')">Continuar</button>
+            <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+        </div>
+    </div>
+
+         <!--DIAPOSITIVA DE MENU CREDITO-->
+
+         <div class="container" style="display: none;" id="menu-credito">
+            <img src="IMG_20240401_131628-removebg.png" alt="logo" class="logo">
+            <h1>Credito</h1>
+            <p class="slogan">Seleccione una de las opciones:</p>
+            <div class="options">
+               <form action>
+                <a href="#" onclick="PagoTarjeta()">Pago de Tarjeta</a>
+                <a href="#" onclick="verhipoteca()">Pago de Credito</a>
+                <a href="#" onclick="PagoAnualidad()">Anualidad</a>
+                <a href="#" onclick="PagoEstudiante()">Credito Educativo</a>
+
+                <button type="button" onclick="volvermenuD()" >Regresar</button>
+                <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+               </form>
+            </div>
+        </div>
+
+        <!--DIAPOSITIVA DE PAGO DE TARJETA-->
+
+        <div class="container" style="display: none;" id="pagotarjetadebito">
+            <img src="IMG_20240401_131628-removebg.png" alt="logo" class="logo">
+            <h1>Pago de Tarjeta</h1>
+            <p class="slogan">Seleccione el modo de pago:</p>
+            <div class="options">
+                <a href="#" onclick="pagocompleto()">Pago completo</a>
+                <a href="#" onclick="pagoabonos()">Pago por Abonos</a>
+                <br>
+                <br>
+                <button type="button" onclick="volvermenucredito()">Regresar</button>
+                <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+            </div>
+        </div>
+         
+        <!--DIAPOSITIVA DE SUBMENU PAGOCOMPLETO-->
+
+        <div class="container" style="display: none;" id="pagocompleto">
+            <img src="IMG_20240401_131628-removebg.png" alt="logo" class="logo">
+            <h1>Pago completo</h1>
+            <form class="options">
+                <label for="cantidadcompleto">Cantidad a pagar: <label for="labelCantidad" id="labelCantidad"></label></label>
+                <input type="number" id="cantidadcompleto1" name="cantidadcompleto1">
+                <a href="#" onclick="pagocompletC()">Pagar</a>
+                <br>
+                <button type="button" onclick="volveraPago1()">Regresar</button>
+                <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+            </form>
+        </div>
+
+        <div class="container" style="display: none;" id="pagocompletoexitoso">
+            <img src="IMG_20240401_131628-removebg.png" alt="logo" class="logo">
+            <h1>!!Pago exitoso!!</h1>
+            <p class="slogan">!!Ha liquidado su saldo!!</p>
+            <form>
+            <img src="7REm.gif" alt="logo" class="logo">
+            <br>
+            <button type="button" onclick="volvermenucredito2()">Continuar</button>
+            <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+            </form>
+        </div>    
+
+        <!--DIAPOSITIVA DE PAGO A ABONOS-->
+
+        <div class="container" style="display: none;" id="pagoabonos">
+            <img src="IMG_20240401_131628-removebg.png" alt="logo" class="logo">
+            <h1>Pago por Abonos</h1>
+            <form class="options">
+                <label for="cantidadabonos">Cantidad a pagar por abonos: <label for="Cantidadabo" id="Cantidadabo"></label></label>
+                <input type="number" id="cantidadcompleto" name="cantidadcompleto">
+                <a href="#" type="button" onclick="pagoabonoC()">Pagar</a>
+                <br>
+                <button type="button" onclick="volveraPago2()">Regresar</button>
+                <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+            </form>
+        </div>
+
+        <div class="container" style="display: none;" id="pagoabonosexitoso">
+            <img src="IMG_20240401_131628-removebg.png" alt="logo" class="logo">
+            <h1>!!Pago exitoso!!</h1>
+            <p class="slogan">!Procure pagar a tiempo para no generar interes!</p>
+            <form action>
+            <img src="7REm.gif" alt="logo" class="logo">
+            <br>
+            <button type="button" onclick="volvermenucredito3()">Continuar</button>
+            <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+            </form>
+        </div>    
+
+        <!--DIAPOSITIVA PAGO DE CREDITO-->
+
+        <div class="container" style="display: none;" id="pagodecredito">
+            <img src="IMG_20240401_131628-removebg.png" alt="logo" class="logo">
+            <h1>Pago de Credito</h1>
+            <p class="slogan">Seleccione una opcion:</p>
+            <div class="options">
+                <form action>
+                    <a href="#" onclick="abonoCapital()">Abono a Capital</a>
+                    <a href="#" onclick="pagoMensual()">Pago Mensual</a>
+                <br>
+                <br>
+                <button type="button" onclick="regresarmenuCredito()">Regresar</button>
+                <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+                </form>
+            </div>    
+        </div>
+
+        <div class="container" style="display: none;" id="abonocapital">
+            <img src="IMG_20240401_131628-removebg.png" alt="logo" class="logo">
+            <h1>Abono a Capital</h1>
+            <form class="options">
+                <label for="abonocapital">Abono:</label>
+                <input type="number" id="abonocapital" name="abonocapital">
+                <a href="#" type="button" onclick="('abonocapitalexitoso')">Abonar</a>
+                <button type="button" onclick="regresarmenuCredito()">Regresar</button>
+                <br>
+                <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+            </form>
+        </div>
+
+        <div class="container" style="display: none;" id="abonocapitalexitoso">
+            <img src="IMG_20240401_131628-removebg.png" alt="logo" class="logo">
+            <h1>!Abono Exitoso!</h1>
+            <form action>
+            <p class="slogan">!Se ha abonado correctamente!</p>
+            <img src="7REm.gif" alt="logo" class="logo">
+            <br>
+            <button type="button" onclick="regresarmenuPagocredito()">Continuar</button>
+            <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+            </form>
+        </div>
+
+
+        <div class="container" style="display: none;" id="pagomensual">
+            <img src="IMG_20240401_131628-removebg.png" alt="logo" class="logo">
+            <h1>Pago Mensual</h1>
+            <form class="options">
+                <label for="pagomensual">Mensualidad de: $800.00</label>
+                <input type="number" id="pagomensual" name="pagomensual">
+                <a href="#" type="button" onclick="('mensualexitoso')">Pagar</a>
+                <button type="button" onclick="regresarmenuPagocredito2()">Regresar</button>
+                <br>
+                <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+            </form>
+        </div>
+
+
+        <div class="container" style="display: none;" id="mensualexitoso">
+            <img src="IMG_20240401_131628-removebg.png" alt="logo" class="logo">
+            <h1>!Pago Exitoso!</h1>
+            <p class="slogan">!!!Mensualidad pagada!!</p>
+            <img src="7REm.gif" alt="logo" class="logo">
+            <br>
+            <button type="button"  onclick=" regresarmenuPagocredito3()">Continuar</button>
+            <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+        </div>
+
+        <!--DIAPOSITIVA ANUALIDAD-->
+
+        <div class="container" style="display: none" id="pagoanualidad">
+            <img src="IMG_20240401_131628-removebg.png" alt="logo" class="logo">
+            <h1>Anualidad</h1>
+            <div id="pagoPendiente" class="hidden">
+                <p class="slogan">Aún no ha pagado su Anualidad...</p>
+                <p class="slogan">Le falta pagar la cantidad de: <div id="CantidadaboAN"></div></p>
+            <form class="options">
+                <input type="number" id="pagoanual" name="pagoanual">
+                <a href="#" type="button" onclick="('pagaranual')">Pagar</a>
+                <button type="button" onclick="denuevoMenuCredito()">Regresar</button>
+                <br>
+                <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+            </form>
+            </div>
+        </div>
+
+        <div class="container" style="display: none" id="pagoanualidad2">
+            <img src="IMG_20240401_131628-removebg.png" alt="logo" class="logo">
+            <h1>Anualidad</h1>
+            <div id="pagoPendiente" class="hidden">
+                <p class="slogan">Pago ya realizado</p>
+                
+            <form class="options">
+                
+                <button type="button" onclick="denuevoMenuCredito2()">Regresar</button>
+                <br>
+                <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+            </form>
+            </div>
+        </div>
+
+        <div class="container" style="display: none;" id="pagaranual">
+            <img src="IMG_20240401_131628-removebg.png" alt="logo" class="logo">
+            <h1>!Pago Exitoso!</h1>
+            <p class="slogan">!!Saldo Liquidado!!</p>
+            <img src="7REm.gif" alt="logo" class="logo">
+            <br>
+            <button type="button" onclick="denuevoMenuCredito2()">Continuar</button>
+            <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+        </div>
+
+        <!--DEUDA ESTUDIANTIL-->
+
+        <div class="container" style="display: none;" id="deudaestudiante">
+            <img src="IMG_20240401_131628-removebg.png" alt="logo" class="logo">
+            <h1>Deuda Estudiantil</h1>
+            <div class="options">
+                <p class="slogan2">Opción Tradicional a Plazo Fijo:</p>
+                <p class="slogan">Seleccione esta opción si tiene un plan de pago con cuotas fijas.</p>
+                <a href="#" class="button" onclick="Tradicional()">Seleccionar</a>
+            </div>
+            <div class="options">
+                <p class="slogan2">Opción Contingente a los Ingresos:</p>
+                <p class="slogan">Seleccione esta opción si tiene un plan de pago basado en sus ingresos.</p>
+                <a href="#" class="button" onclick="Contingente()">Seleccionar</a>
+                <br>
+                <br>
+                <button type="button" onclick=" VolverAcredito()">Regresar</button>
+            <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+            </div>
+        </div>
+
+
+        <div class="container" style="display: none;" id="tradicional">
+            <img src="IMG_20240401_131628-removebg.png" alt="logo" class="logo">
+            <h1>Cuotas fijas</h1>
+            <<p class="slogan">Usted debe pagar:</p><div id="Deuda2"></div>
+            <p class="slogan2">Cantidad pagada: <div id="Cpado2"></div></p>
+            <form class="options">
+                <input type="number" id="pagotradi" name="pagotradi">
+                <a href="#" onclick="PagarMENSU3()">Pagar</a>
+                <button  type="button" onclick="menuDeudaestudiante()">Regresar</button>
+                <br>
+                <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+            </form>
+        </div>
+
+        <div class="container" style="display: none;" id="tradiexitoso">
+            <img src="IMG_20240401_131628-removebg.png" alt="logo" class="logo">
+            <h1>!Pago Exitoso!</h1>
+            <p class="slogan2">Le quedan 11 meses de adeudo</p>
+            <img src="7REm.gif" alt="logo" class="logo">
+            <br>
+            <button type="button" onclick="menuDeudaestudiante2()">Continuar</button>
+            <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+        </div>
+
+
+        <div class="container" style="display: none;" id="opcioncontingente">
+            <img src="IMG_20240401_131628-removebg.png" alt="logo" class="logo">
+            <h1>Pagos por ingresos</h1>
+            <p class="slogan">Usted debe pagar:</p><div id="Deuda"></div>
+            <p class="slogan2">Cantidad pagada: <div id="Cpado"></div></p>
+            <form class="options">
+                <input type="number" id="pagoconti" name="pagoconti">
+                <a href="#" onclick="PagarMENSU2()">Pagar</a>
+                <button type="button"  onclick="menuDeudaestudiante3()">Regresar</button>
+                <br>
+                <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+            </form>
+        </div>
+
+
+        <div class="container" style="display: none;" id="pagocontiexitoso">
+            <img src="IMG_20240401_131628-removebg.png" alt="logo" class="logo">
+            <h1>!Pago Exitoso!</h1>
+            <p class="slogan2">Le quedan 11 meses de adeudo</p>
+            <img src="7REm.gif" alt="logo" class="logo">
+            <br>
+            <button type="button" onclick="menuDeudaestudiante4()">Regresar</button>
+            <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+        </div>
+
+
+        <!--DIAPO DE HIPOTECA-->
+        <div class="container" style="display: none;" id="hipoteca">
+            <img src="IMG_20240401_131628-removebg.png" alt="logo" class="logo">
+            <h1>Pago al credito:</h1>
+            <p class="slogan2">Eliga el pago que desea realizar:</p>
+            <form class="options">
+                <a href="#" onclick="pagocapital()">Automovil</a>
+                <a href="#" onclick="verhipocasa()">Hipotecario</a>
+                <button type="button" onclick="regremenuC()">Regresar</button>
+            </form>
+            <br>
+            <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+        </div>
+
+
+        <!--DIAPO DE PAGO HIPO AUTO-->
+        <div class="container" style="display: none;" id="hipoauto">
+            <img src="IMG_20240401_131628-removebg.png" alt="logo" class="logo">
+            <h1>Automovil</h1>
+            <p class="slogan">Usted adeuda la cantidad de: <span id="datoAPI"></span></p>
+            <p class="slogan2">Eliga metodo de pago:</p>
+            <form class="options">
+                <a href="#" onclick="pagocapital2()">Pago Capital</a>
+                <a href="#" onclick="PagarMensualidad()">Mensualidad Completa</a>
+                <button  type="button" class="button" onclick="regrehipoteca()">Regresar</button>
+            </form>
+            <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+        </div>
+
+        <!--DIAPO DE PAGO CAPITAL DE AUTO-->
+
+        <div class="container" style="display: none;" id="pagocapital">
+            <img src="IMG_20240401_131628-removebg.png" alt="logo" class="logo">
+            <h1>Pago Capital</h1>
+            <form class="options">
+                <label for="numeroServicio">La cantidad a pagar es de:<div id="mesC"></div> </label>
+                <label for="CantiDes">La cantida depositada es:<div id="pagoCapiC"></div> </label>
+                
+                  
+                <input type="text" id="canticapital" name="cantidadcapital">
+                <a href="#" onclick="pagarcapital()">Pagar</a>
+                <button type="button" class="button" onclick="regrehipoteca1()">Regresar</button>
+            </form>
+            <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+        </div>
+        
+
+        <div class="container" style="display: none;" id="pagocapitalexitoso">
+            <img src="IMG_20240401_131628-removebg.png" alt="logo" class="logo">
+            <h1>Pago Capital</h1>
+            <p class="slogan">!Pago exitoso!</p>
+            
+            <img src="6l3f3myw.bmp" alt="logo" class="logo">
+            <form class="options">
+                <button type="button" class="button" onclick="regreauto()">Continuar</button>
+            </form>
+            <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+        </div>
+
+
+        <!--DIAPO DE PAGO MENSUALIDAD COMPLETA-->
+
+        <div class="container" style="display: none;" id="pagomensu">
+            <img src="IMG_20240401_131628-removebg.png" alt="logo" class="logo">
+            <h1>Mensualidad Completa</h1>
+            <form class="options">
+                <label for="numeroServicio">La cantidad a pagar es de:<div id="mesC2"></div> </label>
+                <label for="CantiDes">La cantida depositada es:<div id="pagoCapiC2"></div> </label>
+                <input type="text" id="cantimensualidad" name="cantidadmensual" oninput="validarMultiplo50(this)">
+                <a href="#" onclick="PagarMENSU()">Pagar</a>
+                <button type="button" class="button" onclick="regrehipoteca3()">Regresar</button>
+            </form>
+            <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+        </div>
+
+
+        <div class="container" style="display: none;" id="pagomensuexitoso">
+            <img src="IMG_20240401_131628-removebg.png" alt="logo" class="logo">
+            <h1>Mensualidad Completa</h>
+            <p class="slogan">!Pago exitoso!</p>
+            <p class="slogan2">Usted adeuda la cantidad de: $8,3400.00</p>
+            <img src="6l3f3myw.bmp" alt="logo" class="logo">
+            <form class="options">
+                <button type="button" class="button" onclick="regreauto2()">Continuar</button>
+            </form>
+            <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+        </div>
+
+
+        <!--DIAPO DE PAGO HIPO CASA-->
+
+        <div class="container" style="display: none;" id="hipocasa">
+            <img src="IMG_20240401_131628-removebg.png" alt="logo" class="logo">
+            <h1>Hipoteca</h1>
+            <p class="slogan">Usted adeuda la cantidad de: <span id="datoAPI2"></span></p>
+            <p class="slogan2">Eliga metodo de pago:</p>
+            <form class="options">
+                <a href="#" onclick="verhipocasa1()">Pago Capital</a>
+                <a href="#" onclick="verhipocasa2()">Mensualidad Completa</a>
+                <button type="button" class="button" onclick="volverhipoteca()">Regresar</button>
+            </form>
+            <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+        </div>
+
+
+        <!--DIAPO DE PAGO CAPITAL CASA-->
+
+        <div class="container" style="display: none;" id="pagocapitalcasa">
+            <img src="IMG_20240401_131628-removebg.png" alt="logo" class="logo">
+            <h1>Pago Capital</h1>
+            <form class="options">
+                <label for="numeroServicio">La cantidad a pagar es de:<div id="mesC3"></div> </label>
+                <label for="CantiDes">La cantida depositada es:<div id="pagoCapiC3"></div> </label>
+                <input type="text" id="canticasacapital2" name="cantidadcapitalcasa">
+                <a href="#" onclick="pagarcapitalcasa()">Pagar</a>
+                <button type="button" class="button" onclick="verhipocasa3()">Regresar</button>
+            </form>
+            <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+        </div>
+
+
+        <div class="container" style="display: none;" id="pagocapitalcasaexito">
+            <img src="IMG_20240401_131628-removebg.png" alt="logo" class="logo">
+            <h1>Pago Capital</h1>
+            <p class="slogan">!Pago exitoso!</p>
+            <p class="slogan2">Usted adeuda la cantidad de: $75,400.00</p>
+            <img src="6l3f3myw.bmp" alt="logo" class="logo">
+            <form class="options">
+                <button type="button" class="button" onclick="verhipocasa4()">Continuar</button>
+            </form>
+            <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+        </div>
+
+        <!--DIAPO DE PAGO MENSUAL CASA-->
+
+        <div class="container" style="display: none;" id="pagomensualcasa">
+            <img src="IMG_20240401_131628-removebg.png" alt="logo" class="logo">
+            <h1>Mensualidad Completa</h1>
+            <form class="options">
+                <label for="numeroServicio">La cantidad a pagar es de:<div id="mesC4"></div> </label>
+                <label for="CantiDes">La cantida depositada es:<div id="pagoCapiC4"></div> </label>
+                <input type="text" id="cantimensualidad1" name="cantidadmensual1" oninput="validarMultiplo50(this)">
+                <a href="#" onclick="verhipocasa5()">Pagar</a>
+                <button type="button" class="button" onclick="regrehipoteca3()">Regresar</button>
+            </form>
+            <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+        </div>
+
+
+        <div class="container" style="display: none;" id="pagocasaexitosomes">
+            <img src="IMG_20240401_131628-removebg.png" alt="logo" class="logo">
+            <h1>Mensualidad Completa</h>
+            <p class="slogan">!Pago exitoso!</p>
+            
+            <img src="6l3f3myw.bmp" alt="logo" class="logo">
+            <form class="options">
+                <button type="button" class="button" onclick="regresarhipo()">Continuar</button>
+            </form>
+            <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+        </div>
+        
+
+
+
+
+        <!--DIAPOSITIVA DE SERVICIOS DESDE DEBITO-->
+
+    <div class="container" style="display: none;" id="service-menu2">
+        <img src="IMG_20240401_131628-removebg.png" alt="StarBank Logo" class="logo">
+        <h1>Servicios</h1>
+           <form action="a">
+            <div class="options">
+                <label for="numeroServicio2">Numero de Servicio:</label>
+                <input type="text" id="numeroServicio2" name="numeroServicio2">
+                <br>
+                <a href="#" onclick="pagarServicio2()">Ingresar</a>
+                </div>
+                <button type="button" onclick="regreMenuDEB()">Regresar</button>
+            <br>
+            <p class="slogan2">!!Recuerde nunca comparta sus datos personales!!</p>
+            <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+           </form>
+    </div>
+   
+     <!--DIAPOSITIVA DE PAGO EXITOS DESDE DEBITO-->
+
+     <div class="container" style="display: none;" id="servicio-pagadodebito">
+        <img class="logo" src="IMG_20240401_131628-removebg.png" alt="">
+        <h1>Servicios</h1>
+        <form action="">
+        <p class="slogan">Su servicio ha sido pagado exitosamente. ¡Gracias por su pago!</p>
+        <img src="H1jaWRYIG_1256x620__1.jpg" alt="logo" class="logo">
+        <div class="options">
+        <a href="#" onclick="mostrarMenuDEBITO()">Continuar</a>
+        </div>
+        <p class="slogan"> 💵STARTBANK de S.A de C.V 💵</p>
+        </form>
+    </div>
+
+
+        <script src="main.js">
+        
+        </script>
+   
+</body>
+</html>

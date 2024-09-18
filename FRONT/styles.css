@@ -1,0 +1,181 @@
+@keyframes moveBackground {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 100% 0;
+    }
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('J4o.gif');
+    background-size: cover;
+    animation: moveBackground 40s linear infinite;
+}
+
+@keyframes moveBackground {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 100% 0;
+    }
+}
+
+.container {
+    box-shadow: 0 4px 6px #0000001a;
+    border-radius: 50px;
+    padding: 50px;
+    text-align: center;
+    background-color: #14243d;
+    margin: 20px;
+    max-width: 480px;
+    background-image: url('');
+    background-size:cover;
+    animation: moveBackground 40s;
+}
+
+
+.container2 {
+    box-shadow: 0 4px 6px #0000001a;
+    border-radius: 50px;
+    padding: 50px;
+    text-align: center;
+    background-color: #39d297;
+    margin: 20px;
+    max-width: 480px;
+    background-image: url('');
+    background-size:cover;
+    animation: moveBackground 40s;
+}
+
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    animation: moveBackground 20s linear infinite; /* Define la animación */
+    background-image: url('IMG_20240401_131628-removebg.png'); /* Cambia 'ruta/a/tu/imagen.jpg' por la ruta de tu imagen */
+}
+
+
+h1 {
+    color: #eaff2e;
+    font-size: 50px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+h2 {
+    color: #eaff2e;
+    font-size: 25px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.transac{
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 50px;
+    padding: 50px;
+    text-align: center;
+    background-color: #eaff2e;
+    margin: 20px;
+    max-width: 600px;
+}
+.options {
+    margin-top: 20px;
+}
+.options a {
+    display: inline-block;
+    margin: 10px;
+    padding: 15px 40px;
+    background-color: #f4ff1d;
+    color: #0a0101;
+    text-decoration: none;
+    border-radius: 15px;
+    transition: background-color 0.3s;
+    font-size: 18px;
+}
+.options a:hover {
+    background-color: #0a3297;
+}
+.logo {
+    width: 300px;
+    margin-bottom: 25px;
+}
+.logo2 {
+    width: 230px;
+    margin-bottom: 20px;
+}
+.refe {
+    width: 200px;
+    margin-bottom: 40px;
+}
+.slogan {
+    color: #ff921d;
+    font-style:initial;
+    margin-top: 25px;
+    font-size: 22px;
+}
+
+.slogan2 {
+    color: #1df556;
+    font-style:initial;
+    margin-top: 25px;
+    font-size: 20px;
+}
+
+.gifs {
+    width: 170px;
+    margin-bottom: 20px;
+}
+.frases {
+    color: #f9f9f9;
+    font-style: oblique;
+    margin-top: 100px;
+    font-size: 25px;
+}
+form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+label {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+input {
+    padding: 10px;
+    margin: 10px;
+    width: 250px;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    font-size: 18px;
+}
+button {
+    padding: 10px 40px;
+    background-color: #11aaaf;
+    color: #140404;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 18px;
+}
+
+button:hover {
+    background-color: #fafafa;
+}
